@@ -9,6 +9,7 @@ const config = defineConfig({
   resolve: {
     alias: {
       '#': fileURLToPath(new URL('./src', import.meta.url)),
+      '@naejeon-gogo/design': fileURLToPath(new URL('./packages/design/src', import.meta.url)),
     },
   },
   plugins: [

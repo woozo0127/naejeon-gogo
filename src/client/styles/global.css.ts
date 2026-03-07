@@ -22,7 +22,7 @@ globalStyle('body', {
   maxWidth: '480px',
   margin: '0 auto',
   position: 'relative',
-  fontFamily: vars.font.body,
+  fontFamily: vars.font.primary,
   fontSize: vars.fontSize.md,
   color: vars.color.textPrimary,
   backgroundColor: vars.color.bgPrimary,
@@ -30,7 +30,7 @@ globalStyle('body', {
 });
 
 globalStyle('a', {
-  color: vars.color.gold,
+  color: vars.color.goldPrimary,
   textDecoration: 'none',
 });
 
