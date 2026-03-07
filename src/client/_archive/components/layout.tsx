@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Link, useRouterState } from '@tanstack/react-router';
 import { AdminLoginButton } from '#/client/_archive/components/admin-auth';
 import * as styles from '#/client/_archive/components/layout.css';
@@ -69,8 +68,6 @@ function TrophyIcon() {
   );
 }
 
-
-
 const tabs = [
   { to: '/archive', label: '매칭', icon: SwordsIcon },
   { to: '/archive/members', label: '멤버', icon: UsersIcon },
@@ -92,7 +89,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <main className={styles.main}>{children}</main>
       <nav className={styles.tabBar}>
         {tabs.map((tab) => {
-          const isActive = tab.to === '/' ? currentPath === '/' : currentPath.startsWith(tab.to);
+          const isActive =
+            tab.to === '/archive' ? currentPath === '/archive' : currentPath.startsWith(tab.to);
           return (
             <Link key={tab.to} to={tab.to} className={styles.tabItem} data-active={isActive}>
               <span className={styles.tabIcon}>

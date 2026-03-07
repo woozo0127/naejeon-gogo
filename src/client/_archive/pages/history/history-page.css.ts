@@ -1,7 +1,5 @@
-// @ts-nocheck
 import { style } from '@vanilla-extract/css';
 import { vars } from '#/client/_archive/styles/theme.css';
-
 
 export const matchList = style({
   display: 'flex',
@@ -43,15 +41,9 @@ export const teamColumn = style({
   padding: vars.space.xs,
 });
 
-export const winnerTeamA = style([
-  teamColumn,
-  { backgroundColor: 'rgba(74, 144, 217, 0.1)' },
-]);
+export const winnerTeamA = style([teamColumn, { backgroundColor: 'rgba(74, 144, 217, 0.1)' }]);
 
-export const winnerTeamB = style([
-  teamColumn,
-  { backgroundColor: 'rgba(217, 74, 74, 0.1)' },
-]);
+export const winnerTeamB = style([teamColumn, { backgroundColor: 'rgba(217, 74, 74, 0.1)' }]);
 
 const teamLabel = style({
   fontSize: vars.fontSize.sm,

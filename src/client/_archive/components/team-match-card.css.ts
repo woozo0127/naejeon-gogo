@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { style } from '@vanilla-extract/css';
 import { vars } from '#/client/_archive/styles/theme.css';
 
@@ -70,7 +69,10 @@ const teamLabel = style({
 });
 
 export const teamLabelA = style([teamLabel, { color: vars.color.teamA }]);
-export const teamLabelB = style([teamLabel, { color: vars.color.teamB, justifyContent: 'flex-end' }]);
+export const teamLabelB = style([
+  teamLabel,
+  { color: vars.color.teamB, justifyContent: 'flex-end' },
+]);
 
 export const teamMmr = style({
   fontFamily: vars.font.mono,

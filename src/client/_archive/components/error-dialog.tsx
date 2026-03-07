@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { overlay } from 'overlay-kit';
 import * as styles from '#/client/_archive/components/error-dialog.css';
 import * as common from '#/client/_archive/styles/common.css';

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { ReactNode } from 'react';
 import type { TeamSlot } from '#/client/domains/match';
 import type { Member } from '#/client/domains/member';
@@ -23,7 +22,11 @@ function DefaultSlot({
   slot,
   memberMap,
   isRight,
-}: { slot: TeamSlot; memberMap: Map<string, Member>; isRight: boolean }) {
+}: {
+  slot: TeamSlot;
+  memberMap: Map<string, Member>;
+  isRight: boolean;
+}) {
   const member = memberMap.get(slot.memberId);
   return (
     <div className={isRight ? styles.memberSlotRight : styles.memberSlot}>
@@ -56,14 +59,8 @@ export function TeamMatchCard({
     >
       {(header != null || mmrDiff != null) && (
         <div className={styles.header}>
-          {header != null ? (
-            <span className={styles.headerTitle}>{header}</span>
-          ) : (
-            <span />
-          )}
-          {mmrDiff != null && (
-            <span className={styles.mmrDiffBadge}>MMR 차이: {mmrDiff}</span>
-          )}
+          {header != null ? <span className={styles.headerTitle}>{header}</span> : <span />}
+          {mmrDiff != null && <span className={styles.mmrDiffBadge}>MMR 차이: {mmrDiff}</span>}
         </div>
       )}
 
@@ -77,7 +74,12 @@ export function TeamMatchCard({
               renderSlotA ? (
                 renderSlotA(slot, i)
               ) : (
-                <DefaultSlot key={slot.memberId} slot={slot} memberMap={memberMap} isRight={false} />
+                <DefaultSlot
+                  key={slot.memberId}
+                  slot={slot}
+                  memberMap={memberMap}
+                  isRight={false}
+                />
               ),
             )}
           </div>

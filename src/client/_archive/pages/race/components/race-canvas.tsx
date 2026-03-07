@@ -1,10 +1,9 @@
-// @ts-nocheck
-import { useCallback, useEffect, useImperativeHandle, useRef, useState, forwardRef } from 'react';
-import * as styles from '../race-canvas.css';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Camera } from '../engine/camera';
 import { RaceSimulation } from '../engine/race-simulation';
 import { Renderer } from '../engine/renderer';
 import type { RaceResult } from '../engine/types';
+import * as styles from '../race-canvas.css';
 
 export type RaceCanvasHandle = {
   forceFinish: () => void;
@@ -15,7 +14,10 @@ type RaceCanvasProps = {
   onComplete: (results: RaceResult[]) => void;
 };
 
-export const RaceCanvas = forwardRef<RaceCanvasHandle, RaceCanvasProps>(function RaceCanvas({ members, onComplete }, ref) {
+export const RaceCanvas = forwardRef<RaceCanvasHandle, RaceCanvasProps>(function RaceCanvas(
+  { members, onComplete },
+  ref,
+) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const simRef = useRef<RaceSimulation | null>(null);
   const cameraRef = useRef<Camera | null>(null);
@@ -29,7 +31,9 @@ export const RaceCanvas = forwardRef<RaceCanvasHandle, RaceCanvasProps>(function
   const forceFinishRef = useRef(false);
 
   useImperativeHandle(ref, () => ({
-    forceFinish: () => { forceFinishRef.current = true; },
+    forceFinish: () => {
+      forceFinishRef.current = true;
+    },
   }));
 
   const startSimulation = useCallback(() => {
@@ -65,7 +69,14 @@ export const RaceCanvas = forwardRef<RaceCanvasHandle, RaceCanvasProps>(function
         renderer.height,
       );
 
-      renderer.render(camera, sim.getRacers(), sim.getObstacles(), sim.getTrackLength(), sim.getTrackWidth(), sim.getRankings());
+      renderer.render(
+        camera,
+        sim.getRacers(),
+        sim.getObstacles(),
+        sim.getTrackLength(),
+        sim.getTrackWidth(),
+        sim.getRankings(),
+      );
 
       setElapsedSeconds(Math.floor(sim.elapsed / 1000));
 
@@ -112,8 +123,6 @@ export const RaceCanvas = forwardRef<RaceCanvasHandle, RaceCanvasProps>(function
       <div className={styles.timerOverlay}>
         {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
       </div>
-
-
     </div>
   );
 });

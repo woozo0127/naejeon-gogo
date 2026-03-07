@@ -24,9 +24,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsAdmin(false);
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ isAdmin, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ isAdmin, login, logout }}>{children}</AuthContext.Provider>;
 }

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { style } from '@vanilla-extract/css';
 import { vars } from '#/client/_archive/styles/theme.css';
 
@@ -128,7 +127,6 @@ export const forceFinishButton = style({
   width: '100%',
   marginTop: vars.space.md,
 });
-
 
 // --- Drag and Drop styles ---
 

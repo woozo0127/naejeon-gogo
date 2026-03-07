@@ -1,9 +1,8 @@
-// @ts-nocheck
-import { useState } from 'react';
 import { overlay } from 'overlay-kit';
-import { useAuth } from '#/client/domains/auth';
+import { useState } from 'react';
 import * as styles from '#/client/_archive/components/admin-auth.css';
 import * as common from '#/client/_archive/styles/common.css';
+import { useAuth } from '#/client/domains/auth';
 
 function LockIcon() {
   return (

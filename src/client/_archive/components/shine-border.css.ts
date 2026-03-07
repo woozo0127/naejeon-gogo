@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { keyframes, style } from '@vanilla-extract/css';
 
 const shine = keyframes({

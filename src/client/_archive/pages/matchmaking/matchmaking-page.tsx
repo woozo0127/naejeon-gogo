@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   DndContext,
   type DragEndEvent,
@@ -17,16 +16,19 @@ import { openErrorDialog } from '#/client/_archive/components/error-dialog';
 import { type MatchMethod, SelectPhase } from '#/client/_archive/components/select-phase';
 import { TeamMatchCard } from '#/client/_archive/components/team-match-card';
 import * as cardStyles from '#/client/_archive/components/team-match-card.css';
+import * as styles from '#/client/_archive/pages/matchmaking/matchmaking-page.css';
+import {
+  RaceCanvas,
+  type RaceCanvasHandle,
+} from '#/client/_archive/pages/race/components/race-canvas';
+import type { RaceResult } from '#/client/_archive/pages/race/engine/types';
+import * as common from '#/client/_archive/styles/common.css';
 import type { MatchCandidate, TeamSlot } from '#/client/domains/match';
 import { useCreateMatch } from '#/client/domains/match';
 import { useGenerateMatch } from '#/client/domains/matchmaking';
 import type { Member } from '#/client/domains/member';
 import { useMembers } from '#/client/domains/member';
 import { POSITION_LABELS } from '#/client/domains/position';
-import * as styles from '#/client/_archive/pages/matchmaking/matchmaking-page.css';
-import { RaceCanvas, type RaceCanvasHandle } from '#/client/_archive/pages/race/components/race-canvas';
-import type { RaceResult } from '#/client/_archive/pages/race/engine/types';
-import * as common from '#/client/_archive/styles/common.css';
 
 type Phase = 'select' | 'race' | 'candidates';
 
@@ -51,9 +53,18 @@ function decodeSlotId(encoded: string): SlotId | null {
   return { candidateIndex, team, slotIndex };
 }
 
-function recalcCandidate(candidate: MatchCandidate, memberMap: Map<string, Member>): MatchCandidate {
-  const teamATotal = candidate.teamA.reduce((sum, s) => sum + (memberMap.get(s.memberId)?.mmr ?? 0), 0);
-  const teamBTotal = candidate.teamB.reduce((sum, s) => sum + (memberMap.get(s.memberId)?.mmr ?? 0), 0);
+function recalcCandidate(
+  candidate: MatchCandidate,
+  memberMap: Map<string, Member>,
+): MatchCandidate {
+  const teamATotal = candidate.teamA.reduce(
+    (sum, s) => sum + (memberMap.get(s.memberId)?.mmr ?? 0),
+    0,
+  );
+  const teamBTotal = candidate.teamB.reduce(
+    (sum, s) => sum + (memberMap.get(s.memberId)?.mmr ?? 0),
+    0,
+  );
   return { ...candidate, teamATotal, teamBTotal, mmrDiff: Math.abs(teamATotal - teamBTotal) };
 }
 
@@ -121,7 +132,8 @@ export function MatchmakingPage() {
       const teamATotal = teamA.reduce((sum, s) => sum + (memberMap.get(s.memberId)?.mmr ?? 0), 0);
       const teamBTotal = teamB.reduce((sum, s) => sum + (memberMap.get(s.memberId)?.mmr ?? 0), 0);
       return [{ teamA, teamB, teamATotal, teamBTotal, mmrDiff: Math.abs(teamATotal - teamBTotal) }];
-    }, [memberMap],
+    },
+    [memberMap],
   );
 
   const handleSubmit = async () => {
@@ -164,7 +176,7 @@ export function MatchmakingPage() {
     if (!candidate) return;
     try {
       await createMatch({ teamA: candidate.teamA, teamB: candidate.teamB });
-      navigate({ to: '/history' });
+      navigate({ to: '/archive/history' });
     } catch (e) {
       openErrorDialog(e instanceof Error ? e.message : '매치 생성에 실패했습니다.');
     }
@@ -388,7 +400,11 @@ function CandidateCard({
         header={
           <>
             후보 {candidateIndex + 1}
-            {modified && <span className={styles.modifiedBadge} style={{ marginLeft: '8px' }}>수정됨</span>}
+            {modified && (
+              <span className={styles.modifiedBadge} style={{ marginLeft: '8px' }}>
+                수정됨
+              </span>
+            )}
           </>
         }
         selected={isSelected}

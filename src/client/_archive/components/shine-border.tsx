@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as styles from './shine-border.css';
 
 interface ShineBorderProps {

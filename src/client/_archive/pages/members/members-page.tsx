@@ -1,6 +1,13 @@
-// @ts-nocheck
 import { josa } from 'es-hangul';
 import { useState } from 'react';
+import {
+  CrackOverlay,
+  getCrackBorderColor,
+  getLoseStreakLevel,
+} from '#/client/_archive/components/crack-overlay';
+import { ShineBorder } from '#/client/_archive/components/shine-border';
+import * as styles from '#/client/_archive/pages/members/members-page.css';
+import * as common from '#/client/_archive/styles/common.css';
 import { useAuth } from '#/client/domains/auth';
 import { useMatches } from '#/client/domains/match';
 import type { Member, MemberInput } from '#/client/domains/member';
@@ -13,10 +20,6 @@ import {
 } from '#/client/domains/member';
 import type { Position } from '#/client/domains/position';
 import { POSITION_LABELS, POSITIONS } from '#/client/domains/position';
-import * as styles from '#/client/_archive/pages/members/members-page.css';
-import { CrackOverlay, getCrackBorderColor, getLoseStreakLevel } from '#/client/_archive/components/crack-overlay';
-import { ShineBorder } from '#/client/_archive/components/shine-border';
-import * as common from '#/client/_archive/styles/common.css';
 
 type FormMode = 'create' | 'edit';
 
@@ -102,7 +105,6 @@ export function MembersPage() {
               key={member.id}
               member={member}
               stats={getStats(member.id)}
-
               onEdit={() => openEdit(member)}
               onDelete={() => setDeleteTarget(member)}
             />
@@ -127,7 +129,6 @@ export function MembersPage() {
                 key={member.id}
                 member={member}
                 stats={getStats(member.id)}
-  
                 onEdit={() => openEdit(member)}
                 onDelete={() => setDeleteTarget(member)}
               />
@@ -195,7 +196,6 @@ function MemberStats({ members, matches }: { members: Member[]; matches: { id: s
     </div>
   );
 }
-
 
 function getStreakShines(count: number) {
   // 4연승+: Rainbow 3색 (기존 5+연승 효과)

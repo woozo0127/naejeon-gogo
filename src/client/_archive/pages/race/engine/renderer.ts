@@ -6,8 +6,16 @@ const WALL_COLOR = '#1e2d3d';
 const FINISH_LINE_COLOR = '#c8aa6e';
 const START_LINE_COLOR = '#5b5a56';
 const RACER_COLORS = [
-  '#e06060', '#60a0e0', '#60c060', '#e0a040', '#b060d0',
-  '#40c8c8', '#e07090', '#80b040', '#d08040', '#6080d0',
+  '#e06060',
+  '#60a0e0',
+  '#60c060',
+  '#e0a040',
+  '#b060d0',
+  '#40c8c8',
+  '#e07090',
+  '#80b040',
+  '#d08040',
+  '#6080d0',
 ];
 
 export class Renderer {
@@ -25,7 +33,13 @@ export class Renderer {
     obstacles: readonly Obstacle[],
     trackLength: number,
     trackWidth: number,
-    rankings: { name: string; rank: number; finished: boolean; colorIndex: number; team: 'A' | 'B' }[] = [],
+    rankings: {
+      name: string;
+      rank: number;
+      finished: boolean;
+      colorIndex: number;
+      team: 'A' | 'B';
+    }[] = [],
   ): void {
     const width = this.width;
     const height = this.height;
@@ -100,12 +114,7 @@ export class Renderer {
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         if ((r + c) % 2 === 0) {
-          ctx.fillRect(
-            c * checkerSize,
-            trackLength + r * checkerSize,
-            checkerSize,
-            checkerSize,
-          );
+          ctx.fillRect(c * checkerSize, trackLength + r * checkerSize, checkerSize, checkerSize);
         }
       }
     }
@@ -147,14 +156,8 @@ export class Renderer {
           ctx.save();
           ctx.translate(position.x, position.y);
           ctx.rotate(angle);
-          const w = Math.hypot(
-            vertices[1].x - vertices[0].x,
-            vertices[1].y - vertices[0].y,
-          );
-          const h = Math.hypot(
-            vertices[2].x - vertices[1].x,
-            vertices[2].y - vertices[1].y,
-          );
+          const w = Math.hypot(vertices[1].x - vertices[0].x, vertices[1].y - vertices[0].y);
+          const h = Math.hypot(vertices[2].x - vertices[1].x, vertices[2].y - vertices[1].y);
           ctx.fillStyle = '#f5a623';
           ctx.fillRect(-w / 2, -h / 2, w, h);
           ctx.strokeStyle = '#ffc860';
@@ -228,7 +231,15 @@ export class Renderer {
     }
   }
 
-  drawRankings(rankings: { name: string; rank: number; finished: boolean; colorIndex: number; team: 'A' | 'B' }[]): void {
+  drawRankings(
+    rankings: {
+      name: string;
+      rank: number;
+      finished: boolean;
+      colorIndex: number;
+      team: 'A' | 'B';
+    }[],
+  ): void {
     const ctx = this.ctx;
     const padding = 10;
     const lineHeight = 20;

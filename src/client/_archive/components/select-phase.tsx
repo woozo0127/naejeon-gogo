@@ -1,12 +1,15 @@
-// @ts-nocheck
 import { useState } from 'react';
-import { CrackOverlay, getCrackBorderColor, getLoseStreakLevel } from '#/client/_archive/components/crack-overlay';
+import {
+  CrackOverlay,
+  getCrackBorderColor,
+  getLoseStreakLevel,
+} from '#/client/_archive/components/crack-overlay';
 import { ShineBorder } from '#/client/_archive/components/shine-border';
+import * as styles from '#/client/_archive/pages/matchmaking/matchmaking-page.css';
+import * as common from '#/client/_archive/styles/common.css';
 import type { Member } from '#/client/domains/member';
 import { filterMembersByName } from '#/client/domains/member';
 import { POSITION_LABELS } from '#/client/domains/position';
-import * as styles from '#/client/_archive/pages/matchmaking/matchmaking-page.css';
-import * as common from '#/client/_archive/styles/common.css';
 
 function getStreakShines(count: number) {
   // 4연승+: Rainbow 3색 (기존 5+연승 효과)

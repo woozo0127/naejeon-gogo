@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { style } from '@vanilla-extract/css';
 
 export const crackOverlay = style({

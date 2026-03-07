@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as styles from './crack-overlay.css';
 
 type CrackPath = {

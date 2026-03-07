@@ -1,8 +1,7 @@
-// @ts-nocheck
 import { createFileRoute } from '@tanstack/react-router';
+import { HistoryPage } from '#/client/_archive/pages/history/history-page';
 import { matchesQueryOptions } from '#/client/domains/match';
 import { membersQueryOptions } from '#/client/domains/member';
-import { HistoryPage } from '#/client/_archive/pages/history/history-page';
 
 export const Route = createFileRoute('/archive/history')({
   loader: ({ context: { queryClient } }) =>

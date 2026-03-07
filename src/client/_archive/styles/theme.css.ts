@@ -1,6 +1,4 @@
-// @ts-nocheck
 // Legacy theme for archived components - matches old token structure
-import { createThemeContract, style } from '@vanilla-extract/css';
 import { vars as newVars } from '#/client/styles/theme.css';
 
 // Re-export with old structure shape for archived css.ts files

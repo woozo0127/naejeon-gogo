@@ -1,5 +1,11 @@
 import Matter from 'matter-js';
-import { DEFAULT_RACE_CONFIG, type Obstacle, type RaceConfig, type RaceResult, type Racer } from './types';
+import {
+  DEFAULT_RACE_CONFIG,
+  type Obstacle,
+  type RaceConfig,
+  type RaceResult,
+  type Racer,
+} from './types';
 
 export class RaceSimulation {
   private engine: Matter.Engine;
@@ -11,10 +17,7 @@ export class RaceSimulation {
   private finishCount = 0;
   private _isComplete = false;
 
-  constructor(
-    members: { id: string; name: string }[],
-    config: Partial<RaceConfig> = {},
-  ) {
+  constructor(members: { id: string; name: string }[], config: Partial<RaceConfig> = {}) {
     this.config = { ...DEFAULT_RACE_CONFIG, ...config };
     this.engine = Matter.Engine.create({ gravity: { x: 0, y: 0.3 } });
     this.setupTrack();
@@ -27,18 +30,24 @@ export class RaceSimulation {
     const wallThickness = 40;
 
     const leftWall = Matter.Bodies.rectangle(
-      -wallThickness / 2, trackLength / 2,
-      wallThickness, trackLength + 200,
+      -wallThickness / 2,
+      trackLength / 2,
+      wallThickness,
+      trackLength + 200,
       { isStatic: true, restitution: 0.5 },
     );
     const rightWall = Matter.Bodies.rectangle(
-      trackWidth + wallThickness / 2, trackLength / 2,
-      wallThickness, trackLength + 200,
+      trackWidth + wallThickness / 2,
+      trackLength / 2,
+      wallThickness,
+      trackLength + 200,
       { isStatic: true, restitution: 0.5 },
     );
     const topWall = Matter.Bodies.rectangle(
-      trackWidth / 2, -wallThickness / 2,
-      trackWidth + 200, wallThickness,
+      trackWidth / 2,
+      -wallThickness / 2,
+      trackWidth + 200,
+      wallThickness,
       { isStatic: true, restitution: 0.3 },
     );
 
@@ -68,7 +77,7 @@ export class RaceSimulation {
       Matter.Composite.add(this.engine.world, body);
 
       // Shotgun blast: setVelocity for instant scatter, ±60° wide angle
-      const angle = Math.PI / 2 + (Math.random() - 0.5) * (Math.PI * 2 / 3);
+      const angle = Math.PI / 2 + (Math.random() - 0.5) * ((Math.PI * 2) / 3);
       const speed = 4 + Math.random() * 6;
       Matter.Body.setVelocity(body, {
         x: Math.cos(angle) * speed,
@@ -137,7 +146,7 @@ export class RaceSimulation {
           case 'wall': {
             const w = inBottomZone ? 50 + Math.random() * 50 : 30 + Math.random() * 40;
             const h = 8 + Math.random() * 6;
-            const angle = (Math.random() - 0.5) * Math.PI / 3;
+            const angle = ((Math.random() - 0.5) * Math.PI) / 3;
             body = Matter.Bodies.rectangle(x, y, w, h, {
               isStatic: true,
               restitution: inBottomZone ? 0.5 : 0.2,
@@ -317,7 +326,13 @@ export class RaceSimulation {
       .sort((a, b) => a.finishOrder - b.finishOrder);
   }
 
-  getRankings(): { name: string; rank: number; finished: boolean; colorIndex: number; team: 'A' | 'B' }[] {
+  getRankings(): {
+    name: string;
+    rank: number;
+    finished: boolean;
+    colorIndex: number;
+    team: 'A' | 'B';
+  }[] {
     const sorted = [...this.racers].sort((a, b) => {
       if (a.finishOrder !== null && b.finishOrder !== null) return a.finishOrder - b.finishOrder;
       if (a.finishOrder !== null) return -1;
@@ -329,7 +344,7 @@ export class RaceSimulation {
       rank: i + 1,
       finished: r.finishOrder !== null,
       colorIndex: this.racers.indexOf(r),
-      team: (i + 1) % 2 === 1 ? 'A' as const : 'B' as const,
+      team: (i + 1) % 2 === 1 ? ('A' as const) : ('B' as const),
     }));
   }
 

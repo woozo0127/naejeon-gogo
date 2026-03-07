@@ -1,14 +1,13 @@
-// @ts-nocheck
 import { openConfirmDialog } from '#/client/_archive/components/confirm-dialog';
 import { openErrorDialog } from '#/client/_archive/components/error-dialog';
 import { ShineBorder } from '#/client/_archive/components/shine-border';
+import * as styles from '#/client/_archive/pages/history/history-page.css';
+import * as common from '#/client/_archive/styles/common.css';
 import type { Match, TeamSlot } from '#/client/domains/match';
 import { useCancelMatch, useCompleteMatch, useMatches } from '#/client/domains/match';
 import type { Member } from '#/client/domains/member';
 import { useMembers } from '#/client/domains/member';
 import { POSITION_LABELS } from '#/client/domains/position';
-import * as styles from '#/client/_archive/pages/history/history-page.css';
-import * as common from '#/client/_archive/styles/common.css';
 
 export function HistoryPage() {
   const { data: matches } = useMatches();
@@ -60,22 +59,24 @@ export function HistoryPage() {
       )}
 
       {inProgressMatches.length > 0 && (
-          <div className={styles.matchList}>
-            {inProgressMatches.map((match) => (
-              <InProgressCard
-                key={match.id}
-                match={match}
-                memberMap={memberMap}
-                onComplete={(winner) => handleComplete(match.id, winner)}
-                onCancel={() => handleCancel(match.id)}
-                loading={isCompleting || isCanceling}
-              />
-            ))}
-          </div>
+        <div className={styles.matchList}>
+          {inProgressMatches.map((match) => (
+            <InProgressCard
+              key={match.id}
+              match={match}
+              memberMap={memberMap}
+              onComplete={(winner) => handleComplete(match.id, winner)}
+              onCancel={() => handleCancel(match.id)}
+              loading={isCompleting || isCanceling}
+            />
+          ))}
+        </div>
       )}
 
       {completedMatches.length > 0 && (
-        <div className={`${styles.matchList} ${inProgressMatches.length > 0 ? styles.completedSection : ''}`}>
+        <div
+          className={`${styles.matchList} ${inProgressMatches.length > 0 ? styles.completedSection : ''}`}
+        >
           {completedMatches.map((match) => (
             <MatchCard key={match.id} match={match} memberMap={memberMap} />
           ))}
@@ -185,14 +186,14 @@ function TeamColumn({
   isWinner: boolean;
 }) {
   const columnClass = isWinner
-    ? side === 'A' ? styles.winnerTeamA : styles.winnerTeamB
+    ? side === 'A'
+      ? styles.winnerTeamA
+      : styles.winnerTeamB
     : styles.teamColumn;
 
   return (
     <div className={columnClass}>
-      <span className={side === 'A' ? styles.teamLabelA : styles.teamLabelB}>
-        팀 {label}
-      </span>
+      <span className={side === 'A' ? styles.teamLabelA : styles.teamLabelB}>팀 {label}</span>
       <div className={styles.teamMembers}>
         {slots.map((slot) => (
           <div
