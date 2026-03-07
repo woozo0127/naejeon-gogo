@@ -1,8 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { membersQueryOptions } from '#/client/domains/member';
-import { MatchmakingPage } from '#/client/pages/matchmaking/matchmaking-page';
 
 export const Route = createFileRoute('/')({
-  loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(membersQueryOptions),
-  component: MatchmakingPage,
+  component: () => <div style={{ color: '#F0E6D2', padding: 40 }}>새 디자인 시스템 적용 중...</div>,
 });
