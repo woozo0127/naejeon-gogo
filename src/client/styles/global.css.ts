@@ -19,8 +19,6 @@ globalStyle('html::-webkit-scrollbar', {
 
 globalStyle('body', {
   height: '100%',
-  maxWidth: '480px',
-  margin: '0 auto',
   position: 'relative',
   fontFamily: vars.font.primary,
   fontSize: vars.fontSize.md,
