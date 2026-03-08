@@ -10,25 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ArchiveRouteImport } from './routes/archive'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as ArchiveIndexRouteImport } from './routes/archive/index'
+import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as ArchiveMembersRouteImport } from './routes/archive/members'
 import { Route as ArchiveHistoryRouteImport } from './routes/archive/history'
+import { Route as AppMembersRouteImport } from './routes/_app/members'
+import { Route as AppHistoryRouteImport } from './routes/_app/history'
 
 const ArchiveRoute = ArchiveRouteImport.update({
   id: '/archive',
   path: '/archive',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArchiveIndexRoute = ArchiveIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ArchiveRoute,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
 } as any)
 const ArchiveMembersRoute = ArchiveMembersRouteImport.update({
   id: '/members',
@@ -40,26 +47,43 @@ const ArchiveHistoryRoute = ArchiveHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => ArchiveRoute,
 } as any)
+const AppMembersRoute = AppMembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AppIndexRoute
   '/archive': typeof ArchiveRouteWithChildren
+  '/history': typeof AppHistoryRoute
+  '/members': typeof AppMembersRoute
   '/archive/history': typeof ArchiveHistoryRoute
   '/archive/members': typeof ArchiveMembersRoute
   '/archive/': typeof ArchiveIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/history': typeof AppHistoryRoute
+  '/members': typeof AppMembersRoute
   '/archive/history': typeof ArchiveHistoryRoute
   '/archive/members': typeof ArchiveMembersRoute
+  '/': typeof AppIndexRoute
   '/archive': typeof ArchiveIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
   '/archive': typeof ArchiveRouteWithChildren
+  '/_app/history': typeof AppHistoryRoute
+  '/_app/members': typeof AppMembersRoute
   '/archive/history': typeof ArchiveHistoryRoute
   '/archive/members': typeof ArchiveMembersRoute
+  '/_app/': typeof AppIndexRoute
   '/archive/': typeof ArchiveIndexRoute
 }
 export interface FileRouteTypes {
@@ -67,22 +91,33 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/archive'
+    | '/history'
+    | '/members'
     | '/archive/history'
     | '/archive/members'
     | '/archive/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/archive/history' | '/archive/members' | '/archive'
-  id:
-    | '__root__'
-    | '/'
-    | '/archive'
+  to:
+    | '/history'
+    | '/members'
     | '/archive/history'
     | '/archive/members'
+    | '/'
+    | '/archive'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/archive'
+    | '/_app/history'
+    | '/_app/members'
+    | '/archive/history'
+    | '/archive/members'
+    | '/_app/'
     | '/archive/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   ArchiveRoute: typeof ArchiveRouteWithChildren
 }
 
@@ -95,11 +130,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArchiveRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
+    '/_app': {
+      id: '/_app'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/archive/': {
@@ -108,6 +143,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/archive/'
       preLoaderRoute: typeof ArchiveIndexRouteImport
       parentRoute: typeof ArchiveRoute
+    }
+    '/_app/': {
+      id: '/_app/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
     '/archive/members': {
       id: '/archive/members'
@@ -123,8 +165,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArchiveHistoryRouteImport
       parentRoute: typeof ArchiveRoute
     }
+    '/_app/members': {
+      id: '/_app/members'
+      path: '/members'
+      fullPath: '/members'
+      preLoaderRoute: typeof AppMembersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/history': {
+      id: '/_app/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
+
+interface AppRouteChildren {
+  AppHistoryRoute: typeof AppHistoryRoute
+  AppMembersRoute: typeof AppMembersRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppHistoryRoute: AppHistoryRoute,
+  AppMembersRoute: AppMembersRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface ArchiveRouteChildren {
   ArchiveHistoryRoute: typeof ArchiveHistoryRoute
@@ -142,7 +212,7 @@ const ArchiveRouteWithChildren =
   ArchiveRoute._addFileChildren(ArchiveRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   ArchiveRoute: ArchiveRouteWithChildren,
 }
 export const routeTree = rootRouteImport
