@@ -1,9 +1,9 @@
 import { DndContext, type DragEndEvent, useDraggable, useDroppable } from '@dnd-kit/core';
 import { Avatar, Badge } from '@naejeon-gogo/design';
 import { Flame, GripVertical, Skull } from 'lucide-react';
-import type { MatchCandidate } from '#/client/domains/match/model';
-import type { Member } from '#/client/domains/member/model';
-import { POSITION_LABELS, type Position } from '#/client/domains/position/model';
+import type { MatchCandidate } from '../model';
+import type { Member } from '#/client/modules/member';
+import { POSITION_LABELS, type Position } from '#/client/modules/position';
 import * as styles from './candidate-card.css';
 
 type DragData = { team: 'A' | 'B'; position: Position };

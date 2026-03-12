@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { MATCHES_QUERY_KEY } from '#/client/domains/match/use-matches';
+import { MATCHES_QUERY_KEY } from './use-matches';
 import { cancelMatch } from '#/server/match/match.controller';
 
 export function useCancelMatch() {

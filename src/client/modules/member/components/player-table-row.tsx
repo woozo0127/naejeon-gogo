@@ -1,6 +1,6 @@
 import { Flame, Skull } from 'lucide-react';
-import type { Member } from '#/client/domains/member/model';
-import { POSITION_LABELS } from '#/client/domains/position/model';
+import type { Member } from '../model';
+import { POSITION_LABELS } from '#/client/modules/position';
 import * as styles from './player-table-row.css';
 
 type PlayerTableRowProps = {

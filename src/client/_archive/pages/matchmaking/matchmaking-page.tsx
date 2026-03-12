@@ -23,12 +23,11 @@ import {
 } from '#/client/_archive/pages/race/components/race-canvas';
 import type { RaceResult } from '#/client/_archive/pages/race/engine/types';
 import * as common from '#/client/_archive/styles/common.css';
-import type { MatchCandidate, TeamSlot } from '#/client/domains/match';
-import { useCreateMatch } from '#/client/domains/match';
-import { useGenerateMatch } from '#/client/domains/match';
-import type { Member } from '#/client/domains/member';
-import { useMembers } from '#/client/domains/member';
-import { POSITION_LABELS } from '#/client/domains/position';
+import type { MatchCandidate, TeamSlot } from '#/client/modules/match';
+import { useCreateMatch, useGenerateMatch } from '#/client/modules/match';
+import type { Member } from '#/client/modules/member';
+import { useMembers } from '#/client/modules/member';
+import { POSITION_LABELS } from '#/client/modules/position';
 
 type Phase = 'select' | 'race' | 'candidates';
 

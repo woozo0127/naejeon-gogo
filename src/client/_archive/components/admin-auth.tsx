@@ -2,7 +2,7 @@ import { overlay } from 'overlay-kit';
 import { useState } from 'react';
 import * as styles from '#/client/_archive/components/admin-auth.css';
 import * as common from '#/client/_archive/styles/common.css';
-import { useAuth } from '#/client/domains/auth';
+import { useAuth } from '#/client/modules/auth';
 
 function LockIcon() {
   return (

@@ -1,3 +1,6 @@
+export { CandidateCard } from './components/candidate-card';
+export { LiveGameCard } from './components/live-game-card';
+export { MatchHistoryRow } from './components/match-history-row';
 export * from './model';
 export { useCancelMatch } from './use-cancel-match';
 export { useCompleteMatch } from './use-complete-match';

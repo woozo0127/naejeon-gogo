@@ -2,7 +2,7 @@ import type { QueryClient } from '@tanstack/react-query';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
 import { OverlayProvider } from 'overlay-kit';
-import { AuthProvider } from '#/client/domains/auth';
+import { AuthProvider } from '#/client/modules/auth';
 import '../client/styles/global.css';
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({

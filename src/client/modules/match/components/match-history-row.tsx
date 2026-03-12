@@ -1,4 +1,4 @@
-import type { TeamSide } from '#/client/domains/position/model';
+import type { TeamSide } from '#/client/modules/position';
 import * as styles from './match-history-row.css';
 
 type MatchHistoryRowProps = {

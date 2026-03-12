@@ -1,4 +1,4 @@
-import type { Position } from '#/client/domains/position/model';
+import type { Position } from '#/client/modules/position';
 
 export type Streak = { count: number; type: 'win' | 'lose' };
 

@@ -1,6 +1,6 @@
 import { canBeChoseong, getChoseong } from 'es-hangul';
 
-import type { Member } from '#/client/domains/member/model';
+import type { Member } from './model';
 
 function isAllChoseong(str: string): boolean {
   return str.length > 0 && [...str].every((ch) => canBeChoseong(ch));

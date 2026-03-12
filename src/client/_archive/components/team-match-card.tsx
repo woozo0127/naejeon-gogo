@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import type { TeamSlot } from '#/client/domains/match';
-import type { Member } from '#/client/domains/member';
-import { POSITION_LABELS } from '#/client/domains/position';
+import type { TeamSlot } from '#/client/modules/match';
+import type { Member } from '#/client/modules/member';
+import { POSITION_LABELS } from '#/client/modules/position';
 import * as styles from './team-match-card.css';
 
 type TeamMatchCardProps = {

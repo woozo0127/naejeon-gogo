@@ -3,12 +3,10 @@ import { Gamepad2, UserPlus, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Card } from '#/client/components/card';
 import { DataTable } from '#/client/components/data-table';
-import { KpiWidget } from '#/client/pages/kpi-widget';
 import { PageHeader } from '#/client/components/page-header';
-import { useMatches } from '#/client/domains/match';
-import { useMembers } from '#/client/domains/member';
-import { PlayerTableRow } from '#/client/domains/member/components/player-table-row';
-import { filterMembersByName } from '#/client/domains/member/filter-members-by-name';
+import { useMatches } from '#/client/modules/match';
+import { filterMembersByName, PlayerTableRow, useMembers } from '#/client/modules/member';
+import { KpiWidget } from '#/client/pages/kpi-widget';
 import * as styles from './members.css';
 
 const TABLE_COLUMNS = [

@@ -8,18 +8,18 @@ import {
 import { ShineBorder } from '#/client/_archive/components/shine-border';
 import * as styles from '#/client/_archive/pages/members/members-page.css';
 import * as common from '#/client/_archive/styles/common.css';
-import { useAuth } from '#/client/domains/auth';
-import { useMatches } from '#/client/domains/match';
-import type { Member, MemberInput } from '#/client/domains/member';
+import { useAuth } from '#/client/modules/auth';
+import { useMatches } from '#/client/modules/match';
+import type { Member, MemberInput } from '#/client/modules/member';
 import {
   filterMembersByName,
   useCreateMember,
   useDeleteMember,
   useMembers,
   useUpdateMember,
-} from '#/client/domains/member';
-import type { Position } from '#/client/domains/position';
-import { POSITION_LABELS, POSITIONS } from '#/client/domains/position';
+} from '#/client/modules/member';
+import type { Position } from '#/client/modules/position';
+import { POSITION_LABELS, POSITIONS } from '#/client/modules/position';
 
 type FormMode = 'create' | 'edit';
 

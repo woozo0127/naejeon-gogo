@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { MemberInput } from '#/client/domains/member/model';
-import { MEMBERS_QUERY_KEY } from '#/client/domains/member/use-members';
+import type { MemberInput } from './model';
+import { MEMBERS_QUERY_KEY } from './use-members';
 import { createMember } from '#/server/member/member.controller';
 
 export function useCreateMember() {

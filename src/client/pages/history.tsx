@@ -3,10 +3,8 @@ import { useMemo } from 'react';
 import { Card } from '#/client/components/card';
 import { DataTable } from '#/client/components/data-table';
 import { PageHeader } from '#/client/components/page-header';
-import { useMatches } from '#/client/domains/match';
-import { LiveGameCard } from '#/client/domains/match/components/live-game-card';
-import { MatchHistoryRow } from '#/client/domains/match/components/match-history-row';
-import { useMembers } from '#/client/domains/member';
+import { LiveGameCard, MatchHistoryRow, useMatches } from '#/client/modules/match';
+import { useMembers } from '#/client/modules/member';
 import * as styles from './history.css';
 
 const HISTORY_COLUMNS = [

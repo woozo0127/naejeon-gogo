@@ -1,4 +1,4 @@
-import type { Position, TeamSide } from '#/client/domains/position/model';
+import type { Position, TeamSide } from '#/client/modules/position';
 
 export type TeamSlot = {
   memberId: string;

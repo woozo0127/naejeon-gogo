@@ -3,11 +3,11 @@ import { openErrorDialog } from '#/client/_archive/components/error-dialog';
 import { ShineBorder } from '#/client/_archive/components/shine-border';
 import * as styles from '#/client/_archive/pages/history/history-page.css';
 import * as common from '#/client/_archive/styles/common.css';
-import type { Match, TeamSlot } from '#/client/domains/match';
-import { useCancelMatch, useCompleteMatch, useMatches } from '#/client/domains/match';
-import type { Member } from '#/client/domains/member';
-import { useMembers } from '#/client/domains/member';
-import { POSITION_LABELS } from '#/client/domains/position';
+import type { Match, TeamSlot } from '#/client/modules/match';
+import { useCancelMatch, useCompleteMatch, useMatches } from '#/client/modules/match';
+import type { Member } from '#/client/modules/member';
+import { useMembers } from '#/client/modules/member';
+import { POSITION_LABELS } from '#/client/modules/position';
 
 export function HistoryPage() {
   const { data: matches } = useMatches();

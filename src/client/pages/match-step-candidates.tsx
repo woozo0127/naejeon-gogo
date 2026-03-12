@@ -3,10 +3,9 @@ import { Check, Info, Shuffle, TriangleAlert } from 'lucide-react';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
 import { PageHeader } from '#/client/components/page-header';
-import { CandidateCard } from '#/client/domains/match/components/candidate-card';
-import type { MatchCandidate } from '#/client/domains/match/model';
-import type { Member } from '#/client/domains/member/model';
-import type { Position } from '#/client/domains/position/model';
+import { CandidateCard, type MatchCandidate } from '#/client/modules/match';
+import type { Member } from '#/client/modules/member';
+import type { Position } from '#/client/modules/position';
 import * as styles from './match-step-candidates.css';
 
 function openConfirmDialog(): Promise<boolean> {
@@ -17,8 +16,7 @@ function openConfirmDialog(): Promise<boolean> {
       onExited={unmount}
       header={
         <>
-          <Dialog.Icon icon={TriangleAlert} variant="danger" />
-          팀 구성을 확정하시겠습니까?
+          <Dialog.Icon icon={TriangleAlert} variant="danger" />팀 구성을 확정하시겠습니까?
         </>
       }
       body="확정 후에는 선택한 팀 구성으로 내전이 시작됩니다. 이 작업은 되돌릴 수 없습니다."
@@ -104,12 +102,7 @@ export function MatchStepCandidates({
           <Button variant="secondary" icon={Shuffle} onClick={onReshuffle}>
             재추첨
           </Button>
-          <Button
-            variant="primary"
-            icon={Check}
-            disabled={isPending}
-            onClick={handleConfirm}
-          >
+          <Button variant="primary" icon={Check} disabled={isPending} onClick={handleConfirm}>
             팀 구성 확정
           </Button>
         </div>

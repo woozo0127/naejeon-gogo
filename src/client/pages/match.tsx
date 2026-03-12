@@ -1,10 +1,8 @@
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
-import type { MatchCandidate } from '#/client/domains/match/model';
-import { useCreateMatch } from '#/client/domains/match/use-create-match';
-import { useGenerateMatch } from '#/client/domains/match';
-import { useMembers } from '#/client/domains/member';
-import type { Position } from '#/client/domains/position/model';
+import { useCreateMatch, useGenerateMatch, type MatchCandidate } from '#/client/modules/match';
+import { useMembers } from '#/client/modules/member';
+import type { Position } from '#/client/modules/position';
 import * as styles from './match.css';
 import { MatchStepCandidates } from './match-step-candidates';
 import { MatchStepSelect } from './match-step-select';
