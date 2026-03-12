@@ -93,3 +93,9 @@ export const vsText = style({
   fontWeight: '800',
   color: vars.color.textSecondary,
 });
+
+export const actionsRow = style({
+  display: 'flex',
+  gap: vars.spacing.sm,
+  paddingTop: vars.spacing.sm,
+});
