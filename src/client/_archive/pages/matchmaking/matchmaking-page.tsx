@@ -25,7 +25,7 @@ import type { RaceResult } from '#/client/_archive/pages/race/engine/types';
 import * as common from '#/client/_archive/styles/common.css';
 import type { MatchCandidate, TeamSlot } from '#/client/domains/match';
 import { useCreateMatch } from '#/client/domains/match';
-import { useGenerateMatch } from '#/client/domains/matchmaking';
+import { useGenerateMatch } from '#/client/domains/match';
 import type { Member } from '#/client/domains/member';
 import { useMembers } from '#/client/domains/member';
 import { POSITION_LABELS } from '#/client/domains/position';

@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import type { MatchCandidate } from '#/client/domains/match/model';
 import { useCreateMatch } from '#/client/domains/match/use-create-match';
-import { useGenerateMatch } from '#/client/domains/matchmaking';
+import { useGenerateMatch } from '#/client/domains/match';
 import { useMembers } from '#/client/domains/member';
 import type { Position } from '#/client/domains/position/model';
 import * as styles from './match.css';
