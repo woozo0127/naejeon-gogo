@@ -1,3 +1,4 @@
+import { ShineBorder } from '#/client/domains/_shared/components/shine-border';
 import * as styles from './live-game-card.css';
 
 type LiveGameCardProps = {
@@ -9,7 +10,7 @@ type LiveGameCardProps = {
 export function LiveGameCard({ elapsedTime, bluePlayers, redPlayers }: LiveGameCardProps) {
   return (
     <div className={styles.cardWrapper}>
-      <div className={styles.gradientBorder} />
+      <ShineBorder borderWidth={2} duration={14} shineColor={['#785A28', '#C8AA6E', '#F0E6D2']} />
       <div className={styles.cardInner}>
         <div className={styles.liveHeader}>
           <div className={styles.liveHeaderLeft}>
@@ -23,7 +24,9 @@ export function LiveGameCard({ elapsedTime, bluePlayers, redPlayers }: LiveGameC
             className={styles.teamBox}
             style={{ backgroundColor: '#0D1B2A', border: '1px solid #0AC8B930' }}
           >
-            <span className={styles.teamHeader} style={{ color: '#0AC8B9' }}>블루팀</span>
+            <span className={styles.teamHeader} style={{ color: '#0AC8B9' }}>
+              블루팀
+            </span>
             <span className={styles.teamPlayers} style={{ color: '#0AC8B9' }}>
               {bluePlayers.join('\n')}
             </span>

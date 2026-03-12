@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
 import { ScrollText } from 'lucide-react';
-import { PageHeader } from '#/client/domains/_shared/components/page-header';
+import { useMemo } from 'react';
 import { Card } from '#/client/domains/_shared/components/card';
 import { DataTable } from '#/client/domains/_shared/components/data-table';
+import { PageHeader } from '#/client/domains/_shared/components/page-header';
+import { useMatches } from '#/client/domains/match';
 import { LiveGameCard } from '#/client/domains/match/components/live-game-card';
 import { MatchHistoryRow } from '#/client/domains/match/components/match-history-row';
-import { useMatches } from '#/client/domains/match';
 import { useMembers } from '#/client/domains/member';
 import * as styles from './history.css';
 
@@ -50,16 +50,15 @@ export function HistoryPage() {
         </div>
       )}
 
-      <Card
-        icon={ScrollText}
-        title="내전 기록"
-        headerRight={`총 ${completedMatches.length}경기`}
-      >
+      <Card icon={ScrollText} title="내전 기록" headerRight={`총 ${completedMatches.length}경기`}>
         <DataTable columns={HISTORY_COLUMNS}>
           {completedMatches.map((match, i) => (
             <MatchHistoryRow
               key={match.id}
-              date={new Date(match.date).toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })}
+              date={new Date(match.date).toLocaleDateString('ko-KR', {
+                month: '2-digit',
+                day: '2-digit',
+              })}
               winner={match.winner!}
               blueTeamNames={getTeamNames(match.teamA)}
               redTeamNames={getTeamNames(match.teamB)}

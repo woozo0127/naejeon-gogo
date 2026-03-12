@@ -1,6 +1,6 @@
+import { vars } from '@naejeon-gogo/design';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@naejeon-gogo/design';
 
 export const cardRoot = recipe({
   base: {
@@ -36,17 +36,15 @@ export const info = style({
   flex: 1,
 });
 
-export const name = style({
-  fontFamily: vars.font.primary,
-  fontSize: vars.fontSize.md,
-  fontWeight: '600',
-  color: vars.color.textPrimary,
+export const nameRow = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
 });
 
-export const streakBadge = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '4px',
-  fontSize: vars.fontSize.xs,
-  fontWeight: '600',
+export const name = style({
+  fontFamily: vars.font.primary,
+  fontSize: vars.fontSize.sm,
+  fontWeight: '700',
+  color: vars.color.textPrimary,
 });

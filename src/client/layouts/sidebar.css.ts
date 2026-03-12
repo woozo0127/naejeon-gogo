@@ -1,6 +1,6 @@
+import { vars } from '@naejeon-gogo/design';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@naejeon-gogo/design';
 
 export const sidebarRoot = style({
   display: 'flex',
@@ -9,16 +9,41 @@ export const sidebarRoot = style({
   height: '100vh',
   backgroundColor: vars.color.bgSecondary,
   borderRight: `1px solid ${vars.color.borderPrimary}`,
-  padding: '24px 12px',
-  gap: '2px',
 });
 
-export const logo = style({
+export const logoSection = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '12px',
+  padding: '32px 20px 16px',
+});
+
+export const logoImage = style({
+  width: '160px',
+  height: '160px',
+  borderRadius: vars.radius.md,
+  objectFit: 'cover',
+});
+
+export const logoText = style({
   fontFamily: vars.font.primary,
-  fontSize: vars.fontSize['2xl'],
+  fontSize: vars.fontSize['3xl'],
   fontWeight: '700',
-  color: vars.color.goldPrimary,
-  padding: '0 14px 24px',
+  color: vars.color.textPrimary,
+  letterSpacing: '-2px',
+});
+
+export const divider = style({
+  height: '1px',
+  backgroundColor: vars.color.borderPrimary,
+});
+
+export const navSection = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2px',
+  padding: vars.spacing.md,
 });
 
 export const navItem = recipe({
@@ -30,7 +55,6 @@ export const navItem = recipe({
     borderRadius: vars.radius.sm,
     fontFamily: vars.font.primary,
     fontSize: vars.fontSize.md,
-    fontWeight: '500',
     color: vars.color.textSecondary,
     textDecoration: 'none',
     transition: 'background-color 0.15s, color 0.15s',
@@ -45,7 +69,7 @@ export const navItem = recipe({
     active: {
       true: {
         backgroundColor: vars.color.goldMuted,
-        color: vars.color.goldPrimary,
+        color: vars.color.textPrimary,
         fontWeight: '600',
       },
     },

@@ -1,6 +1,6 @@
 import { Flame, Skull } from 'lucide-react';
-import { POSITION_LABELS } from '#/client/domains/position/model';
 import type { Member } from '#/client/domains/member/model';
+import { POSITION_LABELS } from '#/client/domains/position/model';
 import * as styles from './player-table-row.css';
 
 type PlayerTableRowProps = {
@@ -46,9 +46,15 @@ export function PlayerTableRow({ member, stats }: PlayerTableRowProps) {
           {POSITION_LABELS[member.mainPosition]}
         </span>
       </div>
-      <span className={styles.cell} style={{ width: 80 }}>{member.mmr.toLocaleString()}</span>
-      <span className={styles.cell} style={{ width: 60, color: '#0ACE83' }}>{stats.win}</span>
-      <span className={styles.cell} style={{ width: 60, color: '#E84057' }}>{stats.lose}</span>
+      <span className={styles.cell} style={{ width: 80 }}>
+        {member.mmr.toLocaleString()}
+      </span>
+      <span className={styles.cell} style={{ width: 60, color: '#0ACE83' }}>
+        {stats.win}
+      </span>
+      <span className={styles.cell} style={{ width: 60, color: '#E84057' }}>
+        {stats.lose}
+      </span>
       <span
         className={styles.cell}
         style={{
@@ -59,8 +65,12 @@ export function PlayerTableRow({ member, stats }: PlayerTableRowProps) {
       >
         {stats.winRate}
       </span>
-      <span className={styles.cell} style={{ width: 100 }}>{stats.kda}</span>
-      <span className={styles.cell} style={{ width: 80 }}>{stats.games}</span>
+      <span className={styles.cell} style={{ width: 100 }}>
+        {stats.kda}
+      </span>
+      <span className={styles.cell} style={{ width: 80 }}>
+        {stats.games}
+      </span>
       <div className={styles.subPositions} style={{ flex: 1 }}>
         {member.subPositions.map((pos) => (
           <span key={pos} className={styles.subPosBadge}>

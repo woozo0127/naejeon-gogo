@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
 import { vars } from '@naejeon-gogo/design';
+import { style } from '@vanilla-extract/css';
 
 export const page = style({
   display: 'flex',
@@ -10,7 +10,8 @@ export const page = style({
 });
 
 export const statsRow = style({
-  display: 'flex',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: vars.spacing.lg,
 });
 

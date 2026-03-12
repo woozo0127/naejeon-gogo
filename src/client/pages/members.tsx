@@ -1,13 +1,13 @@
-import { useState, useMemo } from 'react';
-import { Users, Percent, Gamepad2, UserPlus } from 'lucide-react';
 import { Button, Input } from '@naejeon-gogo/design';
-import { PageHeader } from '#/client/domains/_shared/components/page-header';
+import { Gamepad2, UserPlus, Users } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { Card } from '#/client/domains/_shared/components/card';
-import { KpiWidget } from '#/client/domains/_shared/components/kpi-widget';
 import { DataTable } from '#/client/domains/_shared/components/data-table';
-import { PlayerTableRow } from '#/client/domains/member/components/player-table-row';
-import { useMembers } from '#/client/domains/member';
+import { KpiWidget } from '#/client/domains/_shared/components/kpi-widget';
+import { PageHeader } from '#/client/domains/_shared/components/page-header';
 import { useMatches } from '#/client/domains/match';
+import { useMembers } from '#/client/domains/member';
+import { PlayerTableRow } from '#/client/domains/member/components/player-table-row';
 import { filterMembersByName } from '#/client/domains/member/filter-members-by-name';
 import * as styles from './members.css';
 
@@ -28,13 +28,13 @@ export function MembersPage() {
   const { data: matches } = useMatches();
   const [search, setSearch] = useState('');
 
-  const filtered = useMemo(
-    () => filterMembersByName(members, search),
-    [members, search],
-  );
+  const filtered = useMemo(() => filterMembersByName(members, search), [members, search]);
 
   const memberStats = useMemo(() => {
-    const statsMap = new Map<string, { win: number; lose: number; winRate: string; kda: string; games: number }>();
+    const statsMap = new Map<
+      string,
+      { win: number; lose: number; winRate: string; kda: string; games: number }
+    >();
     for (const member of members) {
       let win = 0;
       let lose = 0;
@@ -55,25 +55,21 @@ export function MembersPage() {
   }, [members, matches]);
 
   const totalGames = matches.filter((m) => m.status === 'completed').length;
-  const membersWithGames = members.filter((m) => (memberStats.get(m.id)?.games ?? 0) > 0);
-  const avgWinRate = membersWithGames.length > 0
-    ? `${(membersWithGames.reduce((sum, m) => {
-        const s = memberStats.get(m.id)!;
-        return sum + (s.win / s.games) * 100;
-      }, 0) / membersWithGames.length).toFixed(1)}%`
-    : '0.0%';
 
   return (
     <div className={styles.page}>
       <PageHeader
         title="사용자 관리"
         subtitle="등록된 플레이어 목록"
-        right={<Button variant="primary" icon={UserPlus}>사용자 추가</Button>}
+        right={
+          <Button variant="primary" icon={UserPlus}>
+            사용자 추가
+          </Button>
+        }
       />
 
       <div className={styles.statsRow}>
         <KpiWidget icon={Users} value={String(members.length)} label="총 사용자" />
-        <KpiWidget icon={Percent} value={avgWinRate} label="평균 승률" />
         <KpiWidget icon={Gamepad2} value={String(totalGames)} label="총 게임 수" />
       </div>
 
@@ -90,7 +86,15 @@ export function MembersPage() {
             <PlayerTableRow
               key={member.id}
               member={member}
-              stats={memberStats.get(member.id) ?? { win: 0, lose: 0, winRate: '0.0%', kda: '-', games: 0 }}
+              stats={
+                memberStats.get(member.id) ?? {
+                  win: 0,
+                  lose: 0,
+                  winRate: '0.0%',
+                  kda: '-',
+                  games: 0,
+                }
+              }
             />
           ))}
         </DataTable>

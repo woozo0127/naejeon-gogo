@@ -1,92 +1,75 @@
-import { useState, useMemo } from 'react';
-import { Users, RotateCcw, Shuffle, Play } from 'lucide-react';
-import { Button, Input, Badge } from '@naejeon-gogo/design';
-import { PageHeader } from '#/client/domains/_shared/components/page-header';
-import { Card } from '#/client/domains/_shared/components/card';
-import { UserCard } from '#/client/domains/member/components/user-card';
+import { useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
+import type { MatchCandidate } from '#/client/domains/match/model';
+import { useCreateMatch } from '#/client/domains/match/use-create-match';
+import { useGenerateMatch } from '#/client/domains/matchmaking';
 import { useMembers } from '#/client/domains/member';
-import { filterMembersByName } from '#/client/domains/member/filter-members-by-name';
+import type { Position } from '#/client/domains/position/model';
 import * as styles from './match.css';
+import { MatchStepCandidates } from './match-step-candidates';
+import { MatchStepSelect } from './match-step-select';
+
+type Step = 'select' | 'candidates';
 
 export function MatchPage() {
+  const navigate = useNavigate();
   const { data: members } = useMembers();
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [search, setSearch] = useState('');
+  const { execute: generateMatch, isPending: isGenerating } = useGenerateMatch();
+  const { execute: createMatch, isPending: isCreating } = useCreateMatch();
 
-  const filtered = useMemo(
-    () => filterMembersByName(members, search),
-    [members, search],
-  );
+  const [step, setStep] = useState<Step>('select');
+  const [candidates, setCandidates] = useState<MatchCandidate[]>([]);
 
-  function toggleMember(id: string) {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else if (next.size < 10) next.add(id);
-      return next;
-    });
+  async function handleStartMatch(memberIds: string[]) {
+    const result = await generateMatch(memberIds);
+    setCandidates(result);
+    setStep('candidates');
   }
 
-  function resetSelection() {
-    setSelectedIds(new Set());
+  function handleReshuffle() {
+    setCandidates([]);
+    setStep('select');
   }
 
-  function randomSelect() {
-    const ids = members.map((m) => m.id);
-    const shuffled = ids.sort(() => Math.random() - 0.5).slice(0, 10);
-    setSelectedIds(new Set(shuffled));
+  function handleSwap(candidateIndex: number, positionA: Position, positionB: Position) {
+    setCandidates((prev) =>
+      prev.map((c, i) => {
+        if (i !== candidateIndex) return c;
+        const aSlotIdx = c.teamA.findIndex((s) => s.position === positionA);
+        const bSlotIdx = c.teamB.findIndex((s) => s.position === positionB);
+        if (aSlotIdx === -1 || bSlotIdx === -1) return c;
+
+        const newTeamA = [...c.teamA];
+        const newTeamB = [...c.teamB];
+        const tempId = newTeamA[aSlotIdx].memberId;
+        newTeamA[aSlotIdx] = { ...newTeamA[aSlotIdx], memberId: newTeamB[bSlotIdx].memberId };
+        newTeamB[bSlotIdx] = { ...newTeamB[bSlotIdx], memberId: tempId };
+
+        return { ...c, teamA: newTeamA, teamB: newTeamB };
+      }),
+    );
+  }
+
+  async function handleConfirm(candidate: MatchCandidate) {
+    await createMatch({ teamA: candidate.teamA, teamB: candidate.teamB });
+    navigate({ to: '/history' });
   }
 
   return (
     <div className={styles.page}>
-      <PageHeader
-        title="내전 매칭"
-        subtitle="참가할 사용자 10명을 선택하세요"
-        right={
-          <Badge
-            size="sm"
-            bgColor="rgba(30, 45, 61, 1)"
-            textColor="#F0E6D2"
-            icon={<Users size={14} style={{ color: '#C8AA6E' }} />}
-          >
-            {selectedIds.size} / 10 선택됨
-          </Badge>
-        }
-      />
-
-      <Card icon={Users} title="참가자 선택">
-        <div className={styles.cardContent}>
-          <Input
-            placeholder="사용자 검색..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <div className={styles.userGrid}>
-            {filtered.map((member) => (
-              <UserCard
-                key={member.id}
-                name={member.name}
-                mainPosition={member.mainPosition}
-                streak={member.streak}
-                selected={selectedIds.has(member.id)}
-                onClick={() => toggleMember(member.id)}
-              />
-            ))}
-          </div>
-        </div>
-      </Card>
-
-      <div className={styles.actionBar}>
-        <Button variant="ghost" icon={RotateCcw} onClick={resetSelection}>
-          초기화
-        </Button>
-        <Button variant="secondary" icon={Shuffle} onClick={randomSelect}>
-          무작위 선택
-        </Button>
-        <Button variant="primary" icon={Play} disabled={selectedIds.size !== 10}>
-          매칭 시작
-        </Button>
-      </div>
+      {step === 'select' && (
+        <MatchStepSelect onStartMatch={handleStartMatch} isPending={isGenerating} />
+      )}
+      {step === 'candidates' && (
+        <MatchStepCandidates
+          candidates={candidates}
+          members={members}
+          onReshuffle={handleReshuffle}
+          onConfirm={handleConfirm}
+          onSwap={handleSwap}
+          isPending={isCreating}
+        />
+      )}
     </div>
   );
 }

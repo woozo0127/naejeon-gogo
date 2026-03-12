@@ -13,3 +13,4 @@ export type { BadgeVariants } from './components/badge.css';
 export { Toggle } from './components/toggle';
 export { Checkbox } from './components/checkbox';
 export { Avatar } from './components/avatar';
+export { Dialog } from './components/dialog';

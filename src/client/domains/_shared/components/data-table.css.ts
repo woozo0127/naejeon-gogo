@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
 import { vars } from '@naejeon-gogo/design';
+import { style } from '@vanilla-extract/css';
 
 export const headerRow = style({
   display: 'flex',

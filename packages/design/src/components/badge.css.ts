@@ -6,7 +6,6 @@ export const badgeStyle = recipe({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '6px',
     borderRadius: vars.radius.pill,
     fontFamily: vars.font.primary,
     fontSize: vars.fontSize.xs,
@@ -16,12 +15,14 @@ export const badgeStyle = recipe({
   variants: {
     size: {
       sm: {
-        height: '26px',
-        padding: '4px 12px',
+        height: '20px',
+        padding: '2px 6px',
+        gap: '3px',
       },
       md: {
         height: '28px',
         padding: '4px 12px',
+        gap: '6px',
       },
     },
   },
