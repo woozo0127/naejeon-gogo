@@ -24,7 +24,9 @@ export function resetCounter() {
 }
 
 /** 포지션별 2명씩 총 10명의 기본 멤버 셋 생성 */
-export function createStandardMembers(mmrMap?: Partial<Record<Position, [number, number]>>): Member[] {
+export function createStandardMembers(
+  mmrMap?: Partial<Record<Position, [number, number]>>,
+): Member[] {
   const positions: Position[] = ['top', 'jungle', 'mid', 'adc', 'support'];
   const members: Member[] = [];
 
