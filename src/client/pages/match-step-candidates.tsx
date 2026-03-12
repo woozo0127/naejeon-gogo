@@ -1,38 +1,12 @@
-import { Button, Dialog } from '@naejeon-gogo/design';
-import { Check, Info, Shuffle, TriangleAlert } from 'lucide-react';
-import { overlay } from 'overlay-kit';
+import { Button } from '@naejeon-gogo/design';
+import { Check, Info, Shuffle } from 'lucide-react';
 import { useState } from 'react';
 import { PageHeader } from '#/client/components/page-header';
 import { CandidateCard, type MatchCandidate } from '#/client/modules/match';
 import type { Member } from '#/client/modules/member';
 import type { Position } from '#/client/modules/position';
+import { openConfirmDialog } from '#/client/utils/open-confirm-dialog';
 import * as styles from './match-step-candidates.css';
-
-function openConfirmDialog(): Promise<boolean> {
-  return overlay.openAsync<boolean>(({ isOpen, close, unmount }) => (
-    <Dialog
-      open={isOpen}
-      onOverlayClick={() => close(false)}
-      onExited={unmount}
-      header={
-        <>
-          <Dialog.Icon icon={TriangleAlert} variant="danger" />팀 구성을 확정하시겠습니까?
-        </>
-      }
-      body="확정 후에는 선택한 팀 구성으로 내전이 시작됩니다. 이 작업은 되돌릴 수 없습니다."
-      footer={
-        <>
-          <Button variant="secondary" onClick={() => close(false)}>
-            취소
-          </Button>
-          <Button variant="primary" icon={Check} onClick={() => close(true)}>
-            확정
-          </Button>
-        </>
-      }
-    />
-  ));
-}
 
 type MatchStepCandidatesProps = {
   candidates: MatchCandidate[];
@@ -54,7 +28,11 @@ export function MatchStepCandidates({
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleConfirm = async () => {
-    const confirmed = await openConfirmDialog();
+    const confirmed = await openConfirmDialog({
+      title: '팀 구성을 확정하시겠습니까?',
+      body: '확정 후에는 선택한 팀 구성으로 내전이 시작됩니다. 이 작업은 되돌릴 수 없습니다.',
+      confirmText: '확정',
+    });
     if (confirmed) {
       onConfirm(candidates[selectedIndex]);
     }

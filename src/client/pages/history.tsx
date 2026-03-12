@@ -1,6 +1,4 @@
-import { Button, Dialog } from '@naejeon-gogo/design';
-import { ScrollText, TriangleAlert } from 'lucide-react';
-import { overlay } from 'overlay-kit';
+import { ScrollText } from 'lucide-react';
 import { useMemo } from 'react';
 import { Card } from '#/client/components/card';
 import { DataTable } from '#/client/components/data-table';
@@ -14,61 +12,8 @@ import {
 } from '#/client/modules/match';
 import type { TeamSide } from '#/client/modules/position';
 import { useMembers } from '#/client/modules/member';
+import { openConfirmDialog } from '#/client/utils/open-confirm-dialog';
 import * as styles from './history.css';
-
-function openWinConfirmDialog(teamLabel: string): Promise<boolean> {
-  return overlay.openAsync<boolean>(({ isOpen, close, unmount }) => (
-    <Dialog
-      open={isOpen}
-      onOverlayClick={() => close(false)}
-      onExited={unmount}
-      header={
-        <>
-          <Dialog.Icon icon={TriangleAlert} variant="danger" />
-          {teamLabel} 승리로 기록하시겠습니까?
-        </>
-      }
-      body="확정 후 각 팀원의 MMR이 변동됩니다. 이 작업은 되돌릴 수 없습니다."
-      footer={
-        <>
-          <Button variant="secondary" onClick={() => close(false)}>
-            취소
-          </Button>
-          <Button variant="primary" onClick={() => close(true)}>
-            확정
-          </Button>
-        </>
-      }
-    />
-  ));
-}
-
-function openCancelConfirmDialog(): Promise<boolean> {
-  return overlay.openAsync<boolean>(({ isOpen, close, unmount }) => (
-    <Dialog
-      open={isOpen}
-      onOverlayClick={() => close(false)}
-      onExited={unmount}
-      header={
-        <>
-          <Dialog.Icon icon={TriangleAlert} variant="danger" />
-          경기를 취소하시겠습니까?
-        </>
-      }
-      body="취소된 경기는 기록에서 완전히 삭제됩니다."
-      footer={
-        <>
-          <Button variant="secondary" onClick={() => close(false)}>
-            돌아가기
-          </Button>
-          <Button variant="danger" onClick={() => close(true)}>
-            경기 취소
-          </Button>
-        </>
-      }
-    />
-  ));
-}
 
 const HISTORY_COLUMNS = [
   { label: '날짜', width: 100 as const },
@@ -104,7 +49,11 @@ export function HistoryPage() {
   const handleComplete = async (winner: TeamSide) => {
     if (!liveMatch || isPending) return;
     const teamLabel = winner === 'A' ? '블루팀' : '레드팀';
-    const confirmed = await openWinConfirmDialog(teamLabel);
+    const confirmed = await openConfirmDialog({
+      title: `${teamLabel} 승리로 기록하시겠습니까?`,
+      body: '확정 후 각 팀원의 MMR이 변동됩니다. 이 작업은 되돌릴 수 없습니다.',
+      confirmText: '확정',
+    });
     if (!confirmed) return;
     try {
       await completeMatch({ id: liveMatch.id, winner });
@@ -115,7 +64,11 @@ export function HistoryPage() {
 
   const handleCancel = async () => {
     if (!liveMatch || isPending) return;
-    const confirmed = await openCancelConfirmDialog();
+    const confirmed = await openConfirmDialog({
+      title: '경기를 취소하시겠습니까?',
+      body: '취소된 경기는 기록에서 완전히 삭제됩니다.',
+      confirmText: '취소',
+    });
     if (!confirmed) return;
     try {
       await cancelMatch(liveMatch.id);
