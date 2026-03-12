@@ -3,7 +3,7 @@ import { Gamepad2, UserPlus, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Card } from '#/client/components/card';
 import { DataTable } from '#/client/components/data-table';
-import { KpiWidget } from '#/client/domains/_shared/components/kpi-widget';
+import { KpiWidget } from '#/client/pages/kpi-widget';
 import { PageHeader } from '#/client/components/page-header';
 import { useMatches } from '#/client/domains/match';
 import { useMembers } from '#/client/domains/member';
