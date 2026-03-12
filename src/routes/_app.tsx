@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import * as styles from '#/client/layouts/app-layout.css';
-import { Sidebar } from '#/client/layouts/sidebar';
+import * as styles from '#/client/components/app-layout.css';
+import { Sidebar } from '#/client/components/sidebar';
 
 export const Route = createFileRoute('/_app')({
   component: AppLayout,
