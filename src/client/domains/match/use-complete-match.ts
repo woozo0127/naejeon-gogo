@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '#/client/domains/_shared/query-keys';
+import { MEMBERS_QUERY_KEY } from '#/client/domains/member';
+import { MATCHES_QUERY_KEY } from '#/client/domains/match/use-matches';
 import type { TeamSide } from '#/client/domains/position/model';
 import { completeMatch } from '#/server/match/match.controller';
 
@@ -8,8 +9,8 @@ export function useCompleteMatch() {
   const mutation = useMutation({
     mutationFn: (data: { id: string; winner: TeamSide }) => completeMatch({ data }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.matches });
-      queryClient.invalidateQueries({ queryKey: queryKeys.members });
+      queryClient.invalidateQueries({ queryKey: MATCHES_QUERY_KEY });
+      queryClient.invalidateQueries({ queryKey: MEMBERS_QUERY_KEY });
     },
   });
   return {

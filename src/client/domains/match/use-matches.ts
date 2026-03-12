@@ -1,10 +1,11 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import { queryKeys } from '#/client/domains/_shared/query-keys';
 import type { Match } from '#/client/domains/match/model';
 import { getMatches } from '#/server/match/match.controller';
 
+export const MATCHES_QUERY_KEY = ['matches'] as const;
+
 export const matchesQueryOptions = queryOptions({
-  queryKey: queryKeys.matches,
+  queryKey: MATCHES_QUERY_KEY,
   queryFn: () => getMatches(),
 });
 

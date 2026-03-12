@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '#/client/domains/_shared/query-keys';
+import { MATCHES_QUERY_KEY } from '#/client/domains/match/use-matches';
 import { cancelMatch } from '#/server/match/match.controller';
 
 export function useCancelMatch() {
@@ -7,7 +7,7 @@ export function useCancelMatch() {
   const mutation = useMutation({
     mutationFn: (id: string) => cancelMatch({ data: { id } }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.matches });
+      queryClient.invalidateQueries({ queryKey: MATCHES_QUERY_KEY });
     },
   });
   return {

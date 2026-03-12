@@ -1,10 +1,11 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import { queryKeys } from '#/client/domains/_shared/query-keys';
 import type { Member } from '#/client/domains/member/model';
 import { getMembers } from '#/server/member/member.controller';
 
+export const MEMBERS_QUERY_KEY = ['members'] as const;
+
 export const membersQueryOptions = queryOptions({
-  queryKey: queryKeys.members,
+  queryKey: MEMBERS_QUERY_KEY,
   queryFn: () => getMembers(),
 });
 
