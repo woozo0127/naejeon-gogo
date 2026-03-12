@@ -1,10 +1,10 @@
 import { Button, Input } from '@naejeon-gogo/design';
 import { Gamepad2, UserPlus, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { Card } from '#/client/domains/_shared/components/card';
-import { DataTable } from '#/client/domains/_shared/components/data-table';
+import { Card } from '#/client/components/card';
+import { DataTable } from '#/client/components/data-table';
 import { KpiWidget } from '#/client/domains/_shared/components/kpi-widget';
-import { PageHeader } from '#/client/domains/_shared/components/page-header';
+import { PageHeader } from '#/client/components/page-header';
 import { useMatches } from '#/client/domains/match';
 import { useMembers } from '#/client/domains/member';
 import { PlayerTableRow } from '#/client/domains/member/components/player-table-row';

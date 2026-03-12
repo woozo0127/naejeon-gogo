@@ -2,7 +2,7 @@ import { Button, Dialog } from '@naejeon-gogo/design';
 import { Check, Info, Shuffle, TriangleAlert } from 'lucide-react';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
-import { PageHeader } from '#/client/domains/_shared/components/page-header';
+import { PageHeader } from '#/client/components/page-header';
 import { CandidateCard } from '#/client/domains/match/components/candidate-card';
 import type { MatchCandidate } from '#/client/domains/match/model';
 import type { Member } from '#/client/domains/member/model';

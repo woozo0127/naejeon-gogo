@@ -1,8 +1,8 @@
 import { ScrollText } from 'lucide-react';
 import { useMemo } from 'react';
-import { Card } from '#/client/domains/_shared/components/card';
-import { DataTable } from '#/client/domains/_shared/components/data-table';
-import { PageHeader } from '#/client/domains/_shared/components/page-header';
+import { Card } from '#/client/components/card';
+import { DataTable } from '#/client/components/data-table';
+import { PageHeader } from '#/client/components/page-header';
 import { useMatches } from '#/client/domains/match';
 import { LiveGameCard } from '#/client/domains/match/components/live-game-card';
 import { MatchHistoryRow } from '#/client/domains/match/components/match-history-row';

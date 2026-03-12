@@ -1,4 +1,4 @@
-import { ShineBorder } from '#/client/domains/_shared/components/shine-border';
+import { ShineBorder } from '#/client/components/shine-border';
 import * as styles from './live-game-card.css';
 
 type LiveGameCardProps = {
