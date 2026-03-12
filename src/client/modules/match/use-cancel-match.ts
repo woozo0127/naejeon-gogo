@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { MATCHES_QUERY_KEY } from './use-matches';
 import { cancelMatch } from '#/server/match/match.controller';
+import { MATCHES_QUERY_KEY } from './use-matches';
 
 export function useCancelMatch() {
   const queryClient = useQueryClient();

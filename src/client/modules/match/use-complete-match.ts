@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { MATCHES_QUERY_KEY } from './use-matches';
 import { MEMBERS_QUERY_KEY } from '#/client/modules/member';
 import type { TeamSide } from '#/client/modules/position';
 import { completeMatch } from '#/server/match/match.controller';
+import { MATCHES_QUERY_KEY } from './use-matches';
 
 export function useCompleteMatch() {
   const queryClient = useQueryClient();

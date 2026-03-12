@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import type { Member } from './model';
 import { getMembers } from '#/server/member/member.controller';
+import type { Member } from './model';
 
 export const MEMBERS_QUERY_KEY = ['members'] as const;
 

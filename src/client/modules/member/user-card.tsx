@@ -1,7 +1,7 @@
 import { Avatar, Badge } from '@naejeon-gogo/design';
 import { Flame, Skull } from 'lucide-react';
-import type { Streak } from './model';
 import { POSITION_LABELS, type Position } from '#/client/modules/position';
+import type { Streak } from './model';
 import * as styles from './user-card.css';
 
 type UserCardProps = {

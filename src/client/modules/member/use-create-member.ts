@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createMember } from '#/server/member/member.controller';
 import type { MemberInput } from './model';
 import { MEMBERS_QUERY_KEY } from './use-members';
-import { createMember } from '#/server/member/member.controller';
 
 export function useCreateMember() {
   const queryClient = useQueryClient();
