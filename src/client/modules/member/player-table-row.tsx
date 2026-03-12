@@ -1,5 +1,5 @@
 import { Flame, Skull } from 'lucide-react';
-import type { Member } from '../model';
+import type { Member } from './model';
 import { POSITION_LABELS } from '#/client/modules/position';
 import * as styles from './player-table-row.css';
 
