@@ -5,16 +5,15 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   minHeight: '100vh',
+  maxWidth: '480px',
+  margin: '0 auto',
   outline: `1px solid ${vars.color.border}`,
 });
 
 export const header = style({
-  position: 'fixed',
+  position: 'sticky',
   top: 0,
-  left: '50%',
-  transform: 'translateX(-50%)',
   width: '100%',
-  maxWidth: '480px',
   padding: `${vars.space.md} ${vars.space.lg}`,
   borderBottom: `1px solid ${vars.color.border}`,
   backgroundColor: vars.color.bgSecondary,
@@ -42,18 +41,13 @@ export const title = style({
 export const main = style({
   flex: 1,
   padding: vars.space.lg,
-  paddingTop: '82px',
-  paddingBottom: '200px',
   backgroundColor: vars.color.bgSecondary,
 });
 
 export const tabBar = style({
-  position: 'fixed',
+  position: 'sticky',
   bottom: 0,
-  left: '50%',
-  transform: 'translateX(-50%)',
   width: '100%',
-  maxWidth: '480px',
   display: 'flex',
   borderTop: `1px solid ${vars.color.border}`,
   backgroundColor: vars.color.bgSecondary,
