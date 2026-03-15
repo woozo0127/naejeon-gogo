@@ -1,5 +1,5 @@
 import { vars } from '@naejeon-gogo/design';
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 export const layoutRoot = style({
   display: 'flex',
@@ -12,4 +12,9 @@ export const mainArea = style({
   maxWidth: '1180px',
   margin: '0 auto',
   overflow: 'auto',
+  scrollbarWidth: 'none',
+});
+
+globalStyle(`${mainArea}::-webkit-scrollbar`, {
+  display: 'none',
 });
