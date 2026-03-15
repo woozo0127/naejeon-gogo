@@ -5,22 +5,23 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing.xl,
-  height: '100%',
 });
 
 export const candidateList = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing.lg,
-  flex: 1,
-  overflow: 'auto',
 });
 
 export const actionBar = style({
+  position: 'sticky',
+  bottom: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: vars.spacing.md,
+  paddingTop: vars.spacing.xl,
+  background: `linear-gradient(to bottom, transparent, ${vars.color.bgPrimary} 40%)`,
 });
 
 export const leftInfo = style({

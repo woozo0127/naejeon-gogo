@@ -5,7 +5,7 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing.xl,
-  height: '100%',
+  minHeight: '100%',
 });
 
 export const userGrid = style({

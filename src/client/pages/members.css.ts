@@ -5,7 +5,7 @@ export const page = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing.xl,
-  height: '100%',
+  minHeight: '100%',
   padding: vars.spacing['2xl'],
 });
 
